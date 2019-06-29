@@ -1,28 +1,35 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div>
+        <h1>Bitcoin Price Index</h1>
+        <div v-for="i in info">
+            <div>
+            <h1>{{i.code}}</h1><span v-html="i.symbol"></span>
+                <h1>{{i.rate}}</h1>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+    import Vue from 'vue'
+    import axios from 'axios'
+    import VueAxios from 'vue-axios'
+    Vue.use(axios,VueAxios)
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
+    data() {
+        return{
+
+            info:null
+        }
+    },
+    created(){
+            axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((response) => {
+                this.info = response.data.bpi
+            })
+    },
+    filter:{
+
+    }
+
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
