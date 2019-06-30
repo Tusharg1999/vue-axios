@@ -9,7 +9,7 @@
             </v-progress-circular>
         </div>
     </v-container>
-<v-container v-else grid-list-xl>
+      <v-container v-else grid-list-xl>
     <v-layout wrap>
         <v-flex xs4
                 v-for="(item, index) in info"
@@ -49,8 +49,8 @@
             }
         },
         mounted(){
-            axios.get('http://www.omdbapi.com/?s=indiana&apikey=4991b47&page=1&type=movie&Content-Type=application/json')
-                .then((response)=>{this.info=response.data.search
+            axios.get('http://www.omdbapi.com/?s=Avengers&apikey=4991b47&page=1&type=movie&Content-Type=application/json')
+                .then(response=>{this.info=response.data.Search
                 this.loading=false})
                 .catch((error)=>{console.log(error)})
             console.log(this.info)
